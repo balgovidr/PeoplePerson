@@ -1,5 +1,5 @@
 import { useEffect, useState, createContext } from 'react';
-import { onAuthStateChanged, User } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from '../functions/firebase';
 import { useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';

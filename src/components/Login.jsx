@@ -8,7 +8,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const onLogin = (e: { preventDefault: () => void; }) => {
+    const onLogin = (e) => {
         e.preventDefault();
         
         signInWithEmailAndPassword(auth, email, password)
