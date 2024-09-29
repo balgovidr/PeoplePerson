@@ -59,7 +59,7 @@ const Home = () => {
 				{contacts.length > 0 ?
 				contacts.map((contact, index) => {
 					return (
-						<a onClick={() => navigate('/contact-form?id=' + contact.id)} className='py-3 mx-3 border-b border-gray-400 text-gray-800'>
+						<a onClick={() => navigate('/PeoplePerson/contact-form?id=' + contact.id)} className='py-3 mx-3 border-b border-gray-400 text-gray-800'>
 							{contact.first_name + (contact.last_name ? (' ' + contact.last_name) : '')}
 						</a>
 					)
@@ -67,7 +67,7 @@ const Home = () => {
 				:
 				<div>You haven't created any contacts.</div>}
 			</div>
-			<Fab color="primary" aria-label="add" sx={{position: 'absolute', bottom: '15px', right: '15px'}} href='/contact-form'>
+			<Fab color="primary" aria-label="add" sx={{position: 'absolute', bottom: '15px', right: '15px'}} href='/PeoplePerson/contact-form'>
 				<AddIcon />
 			</Fab>
 		</div>
