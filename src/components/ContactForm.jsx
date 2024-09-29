@@ -75,7 +75,7 @@ function ContactForm() {
   return (
     <div className='flex flex-col gap-3'>
       <Header />
-      <form onSubmit={handleSubmit} className='flex flex-col gap-5 p-3'>
+      <form onSubmit={handleSubmit} className='flex flex-col gap-5 p-3 bg-slate-600 text-slate-200'>
         <FormField fields={fields} setFields={setFields} fieldName='first_name' type='text' required={true} />
 
         <FormField fields={fields} setFields={setFields} fieldName='last_name' type='text' />
