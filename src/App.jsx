@@ -3,6 +3,7 @@ import './App.css'
 import Home from "./components/Home";
 import Signup from "./components/SignUp";
 import Login from "./components/Login";
+import ContactForm from "./components/ContactForm";
 
 const router = createBrowserRouter([
 	{
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
 	{
 		path: "/signup",
 		element: <Signup />,
+	},
+	{
+		path: "/contact-form",
+		element: <ContactForm />,
 	},
 ], {
 	basename: '/PeoplePerson'

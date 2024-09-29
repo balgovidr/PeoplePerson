@@ -554,6 +554,38 @@ video {
   display: none;
 }
 
+.static {
+  position: static;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.flex {
+  display: flex;
+}
+
+.max-h-screen {
+  max-height: 100vh;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+
 .text-center {
   text-align: center;
 }

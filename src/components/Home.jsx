@@ -2,16 +2,16 @@ import { useEffect, useState, createContext } from 'react';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from '../functions/firebase';
 import { useNavigate } from 'react-router-dom';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import { collection, getDocs, where, query } from 'firebase/firestore';
+import { Fab } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import { Header } from './Header';
+
+export const AuthContext = createContext(undefined)
 
 const Home = () => {
 	const [user, setUser] = useState(undefined);
 	const [contacts, setContacts] = useState([]);
-
-	const AuthContext = createContext(undefined)
 
     const navigate = useNavigate();
 
@@ -52,17 +52,12 @@ const Home = () => {
 
   return (
 	<AuthContext.Provider value={user}>
-		<div className='flex flex-col w-full h-screen'>
-			<AppBar position="static">
-				<Toolbar>
-					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-						PeoplePerson
-					</Typography>
-				</Toolbar>
-			</AppBar>
-			<div className='flex flex-col'>
+		<div className='flex flex-col w-full max-h-screen'>
+			<Header />
+			<div className='flex flex-col overflow-y-scroll'>
 				{contacts.length > 0 ?
 				contacts.map((contact, index) => {
+					console.log(contact)
 					return (
 						<div>
 							{contact}
@@ -72,6 +67,9 @@ const Home = () => {
 				:
 				<div>You haven't created any contacts.</div>}
 			</div>
+			<Fab color="primary" aria-label="add" sx={{position: 'absolute', bottom: '15px', right: '15px'}} href='/PeoplePerson/contact-form'>
+				<AddIcon />
+			</Fab>
 		</div>
 	</AuthContext.Provider>
   )
