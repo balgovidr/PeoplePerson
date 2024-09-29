@@ -1,17 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { collection, addDoc, doc } from 'firebase/firestore';
+import { collection, addDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { AuthContext } from './Home';
 import { Header } from './Header';
 import {FormField} from './FormField'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from '../functions/firebase';
 
-function ContactForm(contactID = undefined) {
+function ContactForm() {
   const [fields, setFields] = useState({});
   const [user, setUser] = useState(undefined);
 
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const contactID = searchParams.get('id')
 
   useEffect(()=>{
     onAuthStateChanged(auth, (user) => {
@@ -52,13 +55,20 @@ function ContactForm(contactID = undefined) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const contactsRef = collection(db, 'contacts');
+    if (contactID) {
+      const docRef = doc(db, 'contacts', contactID); // Replace 'yourCollection' with your actual collection name
 
-    const response = await addDoc(contactsRef, {...fields, 'creatorID': user.uid});
+      try {
+        await updateDoc(docRef, fields);
+        console.log('Document updated successfully!');
+      } catch (error) {
+        console.error('Error updating document:', error);
+      }
+    } else {
 
-    debugger;
-    if (response) {
+      const contactsRef = collection(db, 'contacts');
 
+      const response = await addDoc(contactsRef, {...fields, 'creatorID': user.uid});
     }
   };
 
@@ -80,7 +90,7 @@ function ContactForm(contactID = undefined) {
 
         <FormField fields={fields} setFields={setFields} fieldName='additional_notes' type='textarea' />
 
-        <button type="submit">Add Contact</button>
+        <button type="submit">{contactID ? 'Update' : 'Add'} Contact</button>
       </form>
     </div>
   );

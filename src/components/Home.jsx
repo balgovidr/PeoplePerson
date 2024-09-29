@@ -16,7 +16,7 @@ const Home = () => {
     const navigate = useNavigate();
 
     useEffect(()=>{
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
               // User is signed in, see docs for a list of available properties
               // https://firebase.google.com/docs/reference/js/firebase.User
@@ -24,7 +24,8 @@ const Home = () => {
 			  setUser(user)
 			  
 			  // Fetch a list of contacts the user has created
-			  setContacts(fetchUserContacts(uid))
+			  const contactsList = await fetchUserContacts(uid)
+			  setContacts(contactsList)
             } else {
               // User is signed out
               // ...
@@ -57,17 +58,16 @@ const Home = () => {
 			<div className='flex flex-col overflow-y-scroll'>
 				{contacts.length > 0 ?
 				contacts.map((contact, index) => {
-					console.log(contact)
 					return (
-						<div>
-							{contact}
-						</div>
+						<a onClick={() => navigate('/contact-form?id=' + contact.id)} className='py-3 mx-3 border-b border-gray-400 text-gray-800'>
+							{contact.first_name + (contact.last_name ? (' ' + contact.last_name) : '')}
+						</a>
 					)
 				})
 				:
 				<div>You haven't created any contacts.</div>}
 			</div>
-			<Fab color="primary" aria-label="add" sx={{position: 'absolute', bottom: '15px', right: '15px'}} href='/PeoplePerson/contact-form'>
+			<Fab color="primary" aria-label="add" sx={{position: 'absolute', bottom: '15px', right: '15px'}} href='/contact-form'>
 				<AddIcon />
 			</Fab>
 		</div>
