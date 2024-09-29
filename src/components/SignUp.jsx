@@ -9,7 +9,7 @@ const Signup = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('');
 
-    const onSubmit = async (e: { preventDefault: () => void; }) => {
+    const onSubmit = async (e) => {
       e.preventDefault()
 
       await createUserWithEmailAndPassword(auth, email, password)
