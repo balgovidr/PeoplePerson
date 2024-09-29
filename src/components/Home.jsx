@@ -55,11 +55,11 @@ const Home = () => {
 	<AuthContext.Provider value={user}>
 		<div className='flex flex-col w-full max-h-screen'>
 			<Header />
-			<div className='flex flex-col overflow-y-scroll'>
+			<div className='flex flex-col overflow-y-scroll bg-slate-600'>
 				{contacts.length > 0 ?
 				contacts.map((contact, index) => {
 					return (
-						<a onClick={() => navigate('/PeoplePerson/contact-form?id=' + contact.id)} className='py-3 mx-3 border-b border-gray-400 text-gray-800'>
+						<a onClick={() => navigate('/contact-form?id=' + contact.id)} className='py-3 mx-3 border-b border-slate-500 text-slate-200'>
 							{contact.first_name + (contact.last_name ? (' ' + contact.last_name) : '')}
 						</a>
 					)
@@ -67,7 +67,7 @@ const Home = () => {
 				:
 				<div>You haven't created any contacts.</div>}
 			</div>
-			<Fab color="primary" aria-label="add" sx={{position: 'absolute', bottom: '15px', right: '15px'}} href='/PeoplePerson/contact-form'>
+			<Fab color="primary" aria-label="add" sx={{position: 'absolute', bottom: '15px', right: '15px'}} href='/contact-form'>
 				<AddIcon />
 			</Fab>
 		</div>
