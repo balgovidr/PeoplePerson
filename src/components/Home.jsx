@@ -67,7 +67,7 @@ const Home = () => {
 				:
 				<div>You haven't created any contacts.</div>}
 			</div>
-			<Fab color="primary" aria-label="add" sx={{position: 'absolute', bottom: '15px', right: '15px'}} href='/contact-form'>
+			<Fab color="primary" aria-label="add" sx={{position: 'absolute', bottom: '15px', right: '15px'}} onClick={() => navigate('/contact-form')}>
 				<AddIcon />
 			</Fab>
 		</div>
